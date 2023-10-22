@@ -1,0 +1,6 @@
+@import "./styles/base.scss";
+.appContainer {
+  font-family: $platform-font;
+  border: 1px solid $secondary-color;
+  height: calc(100vh - 1.25rem);
+}

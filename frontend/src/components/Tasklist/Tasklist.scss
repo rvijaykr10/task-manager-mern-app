@@ -1,0 +1,35 @@
+@import "../../styles/base.scss";
+
+.tasklistContainer {
+  height: calc(100vh - 3.28rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .list {
+    width: 70%;
+    height: 80%;
+    border: 1px solid $primary-color;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.3rem 0.8rem;
+
+        &:first-child {
+          border-bottom: 1px solid $tertiary-color;
+        }
+
+        div:nth-child(2) {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
