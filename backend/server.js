@@ -14,11 +14,27 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// API's
 app.get("/api/tasks", async (req, res) => {
   const tasks = await Task.find({});
   res.json(tasks);
 });
 
+app.post("/api/tasks", async (req, res) => {
+  const { task } = req.body;
+  await Task.create({ task });
+  res.json({ task });
+});
+
+app.delete("/api/tasks/:id", async (req, res) => {
+  const task = await Task.findById(req.params.id);
+  if (task) {
+    await Task.deleteOne({ _id: task._id });
+    res.json({ message: "deleted" });
+  }
+});
+
+// Production Setup
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, "/frontend/build")));
@@ -29,6 +45,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => res.send("API is running"));
 }
 
+//
 app.listen(port, () =>
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`)
 );

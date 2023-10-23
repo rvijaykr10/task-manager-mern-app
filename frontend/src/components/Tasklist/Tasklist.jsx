@@ -10,7 +10,7 @@ const Tasklist = () => {
             <div>#</div>
             <div>TASK</div>
             <div>
-              <span>EDIT</span>
+              {/* <span>EDIT</span> */}
               <span>DELETE</span>
             </div>
           </li>
@@ -18,9 +18,9 @@ const Tasklist = () => {
             <div>1</div>
             <div>go to office</div>
             <div>
-              <span>
+              {/* <span>
                 <button>edit</button>
-              </span>
+              </span> */}
               <span>
                 <button>delete</button>
               </span>
@@ -30,9 +30,9 @@ const Tasklist = () => {
             <div>2</div>
             <div>attend stand up</div>
             <div>
-              <span>
+              {/* <span>
                 <button>edit</button>
-              </span>
+              </span> */}
               <span>
                 <button>delete</button>
               </span>
@@ -42,9 +42,9 @@ const Tasklist = () => {
             <div>3</div>
             <div>go for a break</div>
             <div>
-              <span>
+              {/* <span>
                 <button>edit</button>
-              </span>
+              </span> */}
               <span>
                 <button>delete</button>
               </span>
@@ -54,9 +54,9 @@ const Tasklist = () => {
             <div>4</div>
             <div>attend srum call</div>
             <div>
-              <span>
+              {/* <span>
                 <button>edit</button>
-              </span>
+              </span> */}
               <span>
                 <button>delete</button>
               </span>
@@ -66,9 +66,9 @@ const Tasklist = () => {
             <div>5</div>
             <div>go for a break again</div>
             <div>
-              <span>
+              {/* <span>
                 <button>edit</button>
-              </span>
+              </span> */}
               <span>
                 <button>delete</button>
               </span>
