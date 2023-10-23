@@ -8,7 +8,7 @@ const Tasklist = () => {
   const getTasks = async () => {
     const result = await axios("/api/tasks");
     const response = await result.data;
-    setTasks(response);
+    setTasks(response?.data);
   };
 
   const deleteTask = async (taskId) => {
@@ -23,7 +23,7 @@ const Tasklist = () => {
   if (tasks?.length === 0) {
     return (
       <div className={styles.tasklistContainer}>
-        <h2>No tasks to show</h2>
+        <h3>No tasks to show</h3>
       </div>
     );
   }

@@ -17,20 +17,20 @@ app.use(express.urlencoded({ extended: true }));
 // API's
 app.get("/api/tasks", async (req, res) => {
   const tasks = await Task.find({});
-  res.json(tasks);
+  res.status(200).json({ data: tasks });
 });
 
 app.post("/api/tasks", async (req, res) => {
   const { task } = req.body;
   await Task.create({ task });
-  res.json({ task });
+  res.status(201).json({ task });
 });
 
 app.delete("/api/tasks/:id", async (req, res) => {
   const task = await Task.findById(req.params.id);
   if (task) {
     await Task.deleteOne({ _id: task._id });
-    res.json({ message: "deleted" });
+    res.status(200).json({ message: "deleted" });
   }
 });
 
