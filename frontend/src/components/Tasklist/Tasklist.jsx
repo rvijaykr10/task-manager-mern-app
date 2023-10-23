@@ -1,12 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const getTasks = async () => {
+    const result = await axios("/api/tasks");
+    const response = await result.data;
+    setTasks(response);
+  };
+
+  const deleteTask = async (taskId) => {
+    await axios.delete(`/api/tasks/${taskId}`);
+    getTasks();
+  };
+
   useEffect(() => {
-    fetch("/api/tasks")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    getTasks();
   }, []);
+
+  if (tasks?.length === 0) {
+    return (
+      <div className={styles.tasklistContainer}>
+        <h2>No tasks to show</h2>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.tasklistContainer}>
@@ -20,66 +40,20 @@ const Tasklist = () => {
               <span>DELETE</span>
             </div>
           </li>
-          <li>
-            <div>1</div>
-            <div>go to office</div>
-            <div>
-              {/* <span>
+          {tasks?.map((obj, index) => (
+            <li key={obj?._id}>
+              <div>{index + 1}</div>
+              <div>{obj?.task}</div>
+              <div>
+                {/* <span>
                 <button>edit</button>
               </span> */}
-              <span>
-                <button>delete</button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div>2</div>
-            <div>attend stand up</div>
-            <div>
-              {/* <span>
-                <button>edit</button>
-              </span> */}
-              <span>
-                <button>delete</button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div>3</div>
-            <div>go for a break</div>
-            <div>
-              {/* <span>
-                <button>edit</button>
-              </span> */}
-              <span>
-                <button>delete</button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div>4</div>
-            <div>attend srum call</div>
-            <div>
-              {/* <span>
-                <button>edit</button>
-              </span> */}
-              <span>
-                <button>delete</button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div>5</div>
-            <div>go for a break again</div>
-            <div>
-              {/* <span>
-                <button>edit</button>
-              </span> */}
-              <span>
-                <button>delete</button>
-              </span>
-            </div>
-          </li>
+                <span>
+                  <button onClick={() => deleteTask(obj?._id)}>delete</button>
+                </span>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
