@@ -32,7 +32,13 @@ const Tasklist = () => {
   return (
     <div className={styles.tasklistContainer}>
       <div className={styles.textButtonContainer}>
-        <input type="text" name="task" id="task" ref={inputRef} />
+        <input
+          type="text"
+          name="task"
+          id="task"
+          ref={inputRef}
+          placeholder="Please add task..."
+        />
         <button onClick={addTask}>Add Task</button>
       </div>
       {tasks?.length === 0 && (
