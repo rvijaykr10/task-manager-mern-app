@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {
+  useEffect(() => {
+    fetch("/api/tasks")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <div className={styles.tasklistContainer}>
       <div className={styles.list}>
