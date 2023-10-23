@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./config/db.js";
+import Task from "./models/taskModel.js";
 
 const port = process.env.PORT || 5000;
 
@@ -12,6 +13,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/api/tasks", async (req, res) => {
+  const tasks = await Task.find({});
+  res.json(tasks);
+});
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
