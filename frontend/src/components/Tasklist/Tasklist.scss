@@ -1,6 +1,7 @@
 @import "../../styles/base.scss";
 
 .tasklistContainer {
+  font-family: $platform-font;
   height: calc(100vh - 3.28rem);
   display: flex;
   justify-content: center;
@@ -28,6 +29,16 @@
 
         div:nth-child(2) {
           width: 60%;
+        }
+
+        span {
+          width: 3rem;
+          margin: 0 0.3rem;
+
+          button {
+            width: 3rem;
+            cursor: pointer;
+          }
         }
       }
     }

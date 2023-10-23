@@ -9,32 +9,70 @@ const Tasklist = () => {
           <li>
             <div>#</div>
             <div>TASK</div>
-            <div>EDIT &nbsp; DELETE</div>
+            <div>
+              <span>EDIT</span>
+              <span>DELETE</span>
+            </div>
           </li>
           <li>
             <div>1</div>
             <div>go to office</div>
-            <div>edit &nbsp; delete</div>
+            <div>
+              <span>
+                <button>edit</button>
+              </span>
+              <span>
+                <button>delete</button>
+              </span>
+            </div>
           </li>
           <li>
             <div>2</div>
             <div>attend stand up</div>
-            <div>edit &nbsp; delete</div>
+            <div>
+              <span>
+                <button>edit</button>
+              </span>
+              <span>
+                <button>delete</button>
+              </span>
+            </div>
           </li>
           <li>
             <div>3</div>
             <div>go for a break</div>
-            <div>edit &nbsp; delete</div>
+            <div>
+              <span>
+                <button>edit</button>
+              </span>
+              <span>
+                <button>delete</button>
+              </span>
+            </div>
           </li>
           <li>
             <div>4</div>
             <div>attend srum call</div>
-            <div>edit &nbsp; delete</div>
+            <div>
+              <span>
+                <button>edit</button>
+              </span>
+              <span>
+                <button>delete</button>
+              </span>
+            </div>
           </li>
           <li>
             <div>5</div>
             <div>go for a break again</div>
-            <div>edit &nbsp; delete</div>
+            <div>
+              <span>
+                <button>edit</button>
+              </span>
+              <span>
+                <button>delete</button>
+              </span>
+            </div>
           </li>
         </ul>
       </div>
