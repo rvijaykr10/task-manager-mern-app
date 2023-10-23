@@ -4,8 +4,23 @@
   font-family: $platform-font;
   height: calc(100vh - 3.28rem);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .noTasks {
+    height: 80%;
+  }
+
+  .textButtonContainer {
+    height: 10%;
+
+    input[type="text"] {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 0.6rem;
+    }
+  }
 
   .list {
     width: 70%;
