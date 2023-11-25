@@ -1,11 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks, addTask, deleteTask } from "../../slices/taskSlice";
+import {
+  fetchTasks,
+  addTask,
+  deleteTask,
+  updateTask,
+  editTaskData,
+} from "../../slices/taskSlice";
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {
+  const inputRef = useRef();
+  const editinputRef = useRef(null);
+  //
   const tasks = useSelector((state) => state.tasks.tasks);
+  const taskToUpdate = useSelector((state) => state.tasks.editTaskData);
   //
   const dispatch = useDispatch();
   //
@@ -13,8 +23,13 @@ const Tasklist = () => {
     //load tasks
     dispatch(fetchTasks());
   }, []);
-
-  const inputRef = useRef();
+  //
+  useEffect(() => {
+    if (taskToUpdate._id) {
+      editinputRef.current.value = taskToUpdate.task;
+    }
+  }, [taskToUpdate._id]);
+  //
 
   //delete task
   const deleteTaskHandler = async (taskId) => {
@@ -28,18 +43,48 @@ const Tasklist = () => {
     inputRef.current.value = "";
   };
 
-  return (
-    <div className={styles.tasklistContainer}>
-      <div className={styles.textButtonContainer}>
+  // update task
+  const updateTaskHandler = () => {
+    const { _id: id } = taskToUpdate;
+    dispatch(updateTask({ id, task: editinputRef.current.value }));
+    editinputRef.current.value = "";
+    dispatch(editTaskData({}));
+  };
+
+  const renderInputField = () => {
+    if (Object.keys(taskToUpdate)?.length === 0) {
+      return (
+        <>
+          <input
+            type="text"
+            name="task"
+            id="task"
+            ref={inputRef}
+            placeholder="Please add task..."
+          />
+          <button onClick={addTaskHandler}>Add Task</button>
+        </>
+      );
+    }
+
+    return (
+      <>
         <input
           type="text"
           name="task"
           id="task"
-          ref={inputRef}
-          placeholder="Please add task..."
+          ref={editinputRef}
+          value={editinputRef?.current?.value}
+          placeholder="Please update task..."
         />
-        <button onClick={addTaskHandler}>Add Task</button>
-      </div>
+        <button onClick={updateTaskHandler}>Update</button>
+      </>
+    );
+  };
+
+  return (
+    <div className={styles.tasklistContainer}>
+      <div className={styles.textButtonContainer}>{renderInputField()}</div>
       {tasks?.length === 0 && (
         <div className={styles.noTasks}>
           <h3>No tasks to show</h3>
@@ -52,7 +97,7 @@ const Tasklist = () => {
               <div>#</div>
               <div>TASK</div>
               <div>
-                {/* <span>EDIT</span> */}
+                <span>EDIT</span>
                 <span>DELETE</span>
               </div>
             </li>
@@ -61,9 +106,11 @@ const Tasklist = () => {
                 <div>{index + 1}</div>
                 <div>{obj?.task}</div>
                 <div>
-                  {/* <span>
-                <button>edit</button>
-              </span> */}
+                  <span>
+                    <button onClick={() => dispatch(editTaskData(obj))}>
+                      edit
+                    </button>
+                  </span>
                   <span>
                     <button onClick={() => deleteTaskHandler(obj?._id)}>
                       delete

@@ -15,6 +15,13 @@ export const addTask = createAsyncThunk(
     thunkAPI.dispatch(fetchTasks());
   }
 );
+export const updateTask = createAsyncThunk(
+  "tasks/updateTasks",
+  async (body, thunkAPI) => {
+    await axios.put("/api/tasks", body);
+    thunkAPI.dispatch(fetchTasks());
+  }
+);
 //
 export const deleteTask = createAsyncThunk(
   "tasks/deleteTasks",
@@ -31,9 +38,12 @@ export const tasksSlice = createSlice({
     tasks: [],
     status: "idle",
     error: null,
+    editTaskData: {},
   },
   reducers: {
-    // ... other reducers if needed
+    editTaskData: (state, action) => {
+      state.editTaskData = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -67,8 +77,20 @@ export const tasksSlice = createSlice({
       .addCase(deleteTask.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(updateTask.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateTask.fulfilled, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
+
+export const { editTaskData } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
