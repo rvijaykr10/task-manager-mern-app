@@ -9,22 +9,16 @@
     100% {
       background-color: #d3d3d3; /* Light Gray */
     }
-    20% {
+    33% {
       background-color: #e6e6fa; /* Lavender */
     }
-    40% {
+    66% {
       background-color: #aec6cf; /* Light Blue */
-    }
-    60% {
-      background-color: #fffacd; /* Lemon Chiffon */
-    }
-    80% {
-      background-color: #98ff98; /* Light Green */
     }
   }
 
   animation-name: backgroundChange;
-  animation-duration: 10s; /* Duration of the animation cycle */
+  animation-duration: 30s; /* Duration of the animation cycle */
   animation-timing-function: linear; /* Keep the speed consistent */
   animation-iteration-count: infinite; /* Repeat the animation indefinitely */
 }
