@@ -3,9 +3,28 @@
   font-family: $platform-font;
   border: 1px solid $secondary-color;
   height: calc(100vh - 1.25rem);
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgba(176, 229, 208, 1) 42%,
-    rgba(92, 202, 238, 0.41) 93.6%
-  );
+  /* Define the keyframes for the animation */
+  @keyframes backgroundChange {
+    0%,
+    100% {
+      background-color: #d3d3d3; /* Light Gray */
+    }
+    20% {
+      background-color: #e6e6fa; /* Lavender */
+    }
+    40% {
+      background-color: #aec6cf; /* Light Blue */
+    }
+    60% {
+      background-color: #fffacd; /* Lemon Chiffon */
+    }
+    80% {
+      background-color: #98ff98; /* Light Green */
+    }
+  }
+
+  animation-name: backgroundChange;
+  animation-duration: 10s; /* Duration of the animation cycle */
+  animation-timing-function: linear; /* Keep the speed consistent */
+  animation-iteration-count: infinite; /* Repeat the animation indefinitely */
 }
