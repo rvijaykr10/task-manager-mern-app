@@ -1,32 +1,31 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTasks, addTask, deleteTask } from "../../slices/taskSlice";
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {
-  const [tasks, setTasks] = useState([]);
+  const tasks = useSelector((state) => state.tasks.tasks);
+  //
+  const dispatch = useDispatch();
+  //
+  useEffect(() => {
+    //load tasks
+    dispatch(fetchTasks());
+  }, []);
 
   const inputRef = useRef();
 
-  const getTasks = async () => {
-    const result = await axios("/api/tasks");
-    const response = await result.data;
-    setTasks(response?.data);
+  //delete task
+  const deleteTaskHandler = async (taskId) => {
+    dispatch(deleteTask(taskId));
   };
 
-  const deleteTask = async (taskId) => {
-    await axios.delete(`/api/tasks/${taskId}`);
-    getTasks();
-  };
-
-  useEffect(() => {
-    getTasks();
-  }, []);
-
-  const addTask = async () => {
+  //add task
+  const addTaskHandler = async () => {
     if (inputRef?.current.value === "") return;
-    await axios.post("/api/tasks", { task: inputRef.current.value });
+    dispatch(addTask({ task: inputRef.current.value }));
     inputRef.current.value = "";
-    getTasks();
   };
 
   return (
@@ -39,7 +38,7 @@ const Tasklist = () => {
           ref={inputRef}
           placeholder="Please add task..."
         />
-        <button onClick={addTask}>Add Task</button>
+        <button onClick={addTaskHandler}>Add Task</button>
       </div>
       {tasks?.length === 0 && (
         <div className={styles.noTasks}>
@@ -66,7 +65,9 @@ const Tasklist = () => {
                 <button>edit</button>
               </span> */}
                   <span>
-                    <button onClick={() => deleteTask(obj?._id)}>delete</button>
+                    <button onClick={() => deleteTaskHandler(obj?._id)}>
+                      delete
+                    </button>
                   </span>
                 </div>
               </li>
