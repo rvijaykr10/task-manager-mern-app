@@ -14,23 +14,54 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// API's
+// get tasks
 app.get("/api/tasks", async (req, res) => {
-  const tasks = await Task.find({});
-  res.status(200).json({ data: tasks });
+  try {
+    const tasks = await Task.find({});
+    res.status(200).json({ data: tasks });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
+// add task
 app.post("/api/tasks", async (req, res) => {
-  const { task } = req.body;
-  await Task.create({ task });
-  res.status(201).json({ task });
+  try {
+    const { task } = req.body;
+    await Task.create({ task });
+    res.status(201).json({ task });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
+// update task
+app.put("/api/tasks", async (req, res) => {
+  const { id, task } = req.body;
+
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { task },
+      { new: true }
+    );
+
+    res.status(200).json({ task: updatedTask });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// delete task
 app.delete("/api/tasks/:id", async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  if (task) {
-    await Task.deleteOne({ _id: task._id });
-    res.status(200).json({ message: "deleted" });
+  try {
+    const task = await Task.findById(req.params.id);
+    if (task) {
+      await Task.deleteOne({ _id: task._id });
+      res.status(200).json({ message: "deleted" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
