@@ -51,6 +51,12 @@ const Tasklist = () => {
     dispatch(editTaskData({}));
   };
 
+  // cancel update
+  const cancelTaskHandler = () => {
+    editinputRef.current.value = "";
+    dispatch(editTaskData({}));
+  };
+
   const renderInputField = () => {
     if (Object.keys(taskToUpdate)?.length === 0) {
       return (
@@ -78,6 +84,7 @@ const Tasklist = () => {
           placeholder="Please update task..."
         />
         <button onClick={updateTaskHandler}>Update</button>
+        <button onClick={cancelTaskHandler}>Cancel</button>
       </>
     );
   };
