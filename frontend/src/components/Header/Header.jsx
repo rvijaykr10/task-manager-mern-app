@@ -22,7 +22,7 @@ const Header = () => {
         </Link>
         <span>&nbsp;(MERN)</span>
       </div>
-      <div>User : {userInfo?.name}</div>
+      {userInfo?.name && <div>User : {userInfo?.name}</div>}
       {!isLoggedIn ? (
         <div>
           <Link className={styles.link} to="/login">
