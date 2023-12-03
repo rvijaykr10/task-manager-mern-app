@@ -12,6 +12,7 @@ export const registerUser = createAsyncThunk(
       return data;
     } catch (error) {
       console.error(error);
+      alert(error?.response?.data?.error || error);
     }
   }
 );
@@ -25,6 +26,7 @@ export const loginUser = createAsyncThunk("users/loginUser", async (body) => {
     return data;
   } catch (error) {
     console.error(error);
+    alert(error?.response?.data?.error || error);
   }
 });
 
@@ -34,6 +36,7 @@ export const logoutUser = createAsyncThunk("users/logoutUser", async (body) => {
     await axios.post("/api/users/logout", body);
   } catch (error) {
     console.error(error);
+    alert(error?.response?.data?.error || error);
   }
 });
 

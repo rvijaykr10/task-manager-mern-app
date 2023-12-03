@@ -16,6 +16,7 @@ export const fetchTasks = createAsyncThunk(
         return;
       }
       console.error(error);
+      alert(error?.response?.data?.error || error);
     }
   }
 );
@@ -28,6 +29,7 @@ export const addTask = createAsyncThunk(
       thunkAPI.dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
+      alert(error?.response?.data?.error || error);
     }
   }
 );
@@ -40,6 +42,7 @@ export const updateTask = createAsyncThunk(
       thunkAPI.dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
+      alert(error?.response?.data?.error || error);
     }
   }
 );
@@ -52,6 +55,7 @@ export const deleteTask = createAsyncThunk(
       thunkAPI.dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
+      alert(error?.response?.data?.error || error);
     }
   }
 );
