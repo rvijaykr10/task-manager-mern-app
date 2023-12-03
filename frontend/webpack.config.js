@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
     clean: true,
     assetModuleFilename: "images/[hash][ext][query]",
+    publicPath: "/",
   },
   devtool: "inline-source-map",
   plugins: [
@@ -51,10 +52,14 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, "build"),
     },
+    historyApiFallback: true,
     port: 3000,
     open: true,
     proxy: {

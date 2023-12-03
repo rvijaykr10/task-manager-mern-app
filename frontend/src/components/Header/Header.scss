@@ -2,8 +2,24 @@
 .headerContainer {
   height: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   font-size: $primary-font;
   border-bottom: 1px solid $tertiary-color;
+
+  .heading {
+    display: flex;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+    margin-left: 5px;
+    color: #000;
+  }
 }
