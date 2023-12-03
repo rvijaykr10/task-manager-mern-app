@@ -2,6 +2,7 @@ import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/tasks" element={<Tasklist />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
