@@ -13,8 +13,8 @@ const Login = () => {
       </div>
       <div>
         <form onSubmit={submitHandler}>
-          <input type="email" placeholder="Enter email" />
-          <input type="password" placeholder="Enter password" />
+          <input type="email" placeholder="Enter email" required />
+          <input type="password" placeholder="Enter password" required />
           <button type="submit">Submit</button>
         </form>
       </div>

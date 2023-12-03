@@ -13,10 +13,14 @@ const Register = () => {
       </div>
       <div>
         <form onSubmit={submitHandler}>
-          <input type="text" placeholder="Enter name" />
-          <input type="email" placeholder="Enter email" />
-          <input type="password" placeholder="Enter password" />
-          <input type="password" placeholder="Enter confirm password" />
+          <input type="text" placeholder="Enter name" required />
+          <input type="email" placeholder="Enter email" required />
+          <input type="password" placeholder="Enter password" required />
+          <input
+            type="password"
+            placeholder="Enter confirm password"
+            required
+          />
           <button type="submit">Submit</button>
         </form>
       </div>
