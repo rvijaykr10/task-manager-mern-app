@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchTasks,
@@ -7,7 +6,7 @@ import {
   deleteTask,
   updateTask,
   editTaskData,
-} from "../../slices/taskSlice";
+} from "../../slices/taskSlice.js";
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {

@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { registerUser } from "../../slices/userSlice.js";
 import styles from "./Register.scss";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("called");
+    if (password !== confirmPassword) return;
+    const apiBody = {
+      name,
+      email,
+      password,
+    };
+    dispatch(registerUser(apiBody));
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
   return (
     <div className={styles.register}>
@@ -13,12 +31,32 @@ const Register = () => {
       </div>
       <div>
         <form onSubmit={submitHandler}>
-          <input type="text" placeholder="Enter name" required />
-          <input type="email" placeholder="Enter email" required />
-          <input type="password" placeholder="Enter password" required />
+          <input
+            type="text"
+            value={name}
+            placeholder="Enter name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            value={email}
+            placeholder="Enter email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
           <input
             type="password"
+            value={password}
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            value={confirmPassword}
             placeholder="Enter confirm password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
           <button type="submit">Submit</button>
