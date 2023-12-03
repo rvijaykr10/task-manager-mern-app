@@ -14,6 +14,8 @@ import { createRoot } from "react-dom/client";
 import About from "./components/About/About.jsx";
 import Home from "./components/Home/Home.jsx";
 import Tasklist from "./components/Tasklist/Tasklist.jsx";
+import Login from "./components/Login/Login.jsx";
+import Register from "./components/Register/Register.jsx";
 const root = createRoot(document.getElementById("root"));
 //
 const router = createBrowserRouter(
@@ -22,6 +24,8 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/tasks" element={<Tasklist />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Route>
   )
 );
