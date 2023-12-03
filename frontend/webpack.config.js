@@ -11,6 +11,7 @@ module.exports = {
     clean: true,
     assetModuleFilename: "images/[hash][ext][query]",
   },
+  devtool: "inline-source-map",
   plugins: [
     new HtmlWebPackPlugin({
       template: "./public/index.html",
