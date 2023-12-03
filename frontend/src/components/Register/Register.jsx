@@ -15,18 +15,24 @@ const Register = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) return;
-    const apiBody = {
-      name,
-      email,
-      password,
-    };
-    dispatch(registerUser(apiBody));
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    navigate("/");
+    try {
+      if (password !== confirmPassword) {
+        return;
+      }
+      const apiBody = {
+        name,
+        email,
+        password,
+      };
+      dispatch(registerUser(apiBody));
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className={styles.register}>

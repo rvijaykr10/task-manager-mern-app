@@ -5,24 +5,36 @@ import axios from "axios";
 export const registerUser = createAsyncThunk(
   "users/registerUser",
   async (body) => {
-    const response = await axios.post("/api/users", body);
-    const { data } = response;
-    localStorage.setItem("userInfo", JSON.stringify(data));
-    return data;
+    try {
+      const response = await axios.post("/api/users", body);
+      const data = await response?.data;
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 
 // login
 export const loginUser = createAsyncThunk("users/loginUser", async (body) => {
-  const response = await axios.post("/api/users/auth", body);
-  const { data } = response;
-  localStorage.setItem("userInfo", JSON.stringify(data));
-  return data;
+  try {
+    const response = await axios.post("/api/users/auth", body);
+    const { data } = response;
+    localStorage.setItem("userInfo", JSON.stringify(data));
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // logout
 export const logoutUser = createAsyncThunk("users/logoutUser", async (body) => {
-  await axios.post("/api/users/logout", body);
+  try {
+    await axios.post("/api/users/logout", body);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 //
@@ -52,7 +64,8 @@ export const usersSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.error;
+        state.userInfo = {};
       })
       .addCase(loginUser.pending, (state) => {
         state.status = "loading";

@@ -13,7 +13,9 @@ export const fetchTasks = createAsyncThunk(
     } catch (error) {
       if (error.response.status === 401) {
         navigate("/");
+        return;
       }
+      console.error(error);
     }
   }
 );
@@ -21,23 +23,36 @@ export const fetchTasks = createAsyncThunk(
 export const addTask = createAsyncThunk(
   "tasks/addTasks",
   async (body, thunkAPI) => {
-    await axios.post("/api/tasks", body);
-    thunkAPI.dispatch(fetchTasks());
+    try {
+      await axios.post("/api/tasks", body);
+      thunkAPI.dispatch(fetchTasks());
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
+//
 export const updateTask = createAsyncThunk(
   "tasks/updateTasks",
   async (body, thunkAPI) => {
-    await axios.put("/api/tasks", body);
-    thunkAPI.dispatch(fetchTasks());
+    try {
+      await axios.put("/api/tasks", body);
+      thunkAPI.dispatch(fetchTasks());
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 //
 export const deleteTask = createAsyncThunk(
   "tasks/deleteTasks",
   async (taskId, thunkAPI) => {
-    await axios.delete(`/api/tasks/${taskId}`);
-    thunkAPI.dispatch(fetchTasks());
+    try {
+      await axios.delete(`/api/tasks/${taskId}`);
+      thunkAPI.dispatch(fetchTasks());
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 

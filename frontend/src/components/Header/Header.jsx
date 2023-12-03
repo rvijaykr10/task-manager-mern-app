@@ -13,7 +13,7 @@ const Header = () => {
     dispatch(logout());
   };
 
-  const isLoggedIn = Object.keys(userInfo)?.length > 0;
+  const isLoggedIn = userInfo && Object.keys(userInfo)?.length > 0;
   return (
     <div className={styles.headerContainer}>
       <div className={styles.heading}>
