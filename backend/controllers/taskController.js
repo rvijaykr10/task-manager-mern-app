@@ -4,7 +4,10 @@ import Task from "../models/taskModel.js";
 // get tasks
 const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({});
+    const response = await Task.find({});
+    const userId = await req.user._id.toString();
+
+    const tasks = response.filter((obj) => obj.user.toString() === userId);
     res.status(200).json({ data: tasks });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
