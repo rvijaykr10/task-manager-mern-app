@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../../slices/userSlice.js";
 import styles from "./Register.scss";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  //
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ const Register = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+    navigate("/");
   };
   return (
     <div className={styles.register}>

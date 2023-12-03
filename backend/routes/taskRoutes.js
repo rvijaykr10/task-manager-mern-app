@@ -8,7 +8,13 @@ import {
   deleteTask,
 } from "../controllers/taskController.js";
 
-router.route("/").get(getTasks).post(addTask).put(updateTask);
-router.route("/:id").delete(deleteTask);
+import { protect } from "../middleware/authMiddleware.js";
+
+router
+  .route("/")
+  .get(protect, getTasks)
+  .post(protect, addTask)
+  .put(protect, updateTask);
+router.route("/:id").delete(protect, deleteTask);
 
 export default router;

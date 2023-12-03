@@ -1,12 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const response = await axios("/api/tasks");
-  const data = await response.data;
-  const result = await data.data;
-  return result;
-});
+//
+export const fetchTasks = createAsyncThunk(
+  "tasks/fetchTasks",
+  async (navigate) => {
+    try {
+      const response = await axios("/api/tasks");
+      const data = await response.data;
+      const result = await data.data;
+      return result;
+    } catch (error) {
+      if (error.response.status === 401) {
+        navigate("/");
+      }
+    }
+  }
+);
 //
 export const addTask = createAsyncThunk(
   "tasks/addTasks",
@@ -56,7 +66,7 @@ export const tasksSlice = createSlice({
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.error;
       })
       .addCase(addTask.pending, (state) => {
         state.status = "loading";

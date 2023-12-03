@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   fetchTasks,
   addTask,
@@ -15,12 +17,15 @@ const Tasklist = () => {
   //
   const tasks = useSelector((state) => state.tasks.tasks);
   const taskToUpdate = useSelector((state) => state.tasks.editTaskData);
+  const navigate = useNavigate();
+
   //
   const dispatch = useDispatch();
   //
+
   useEffect(() => {
     //load tasks
-    dispatch(fetchTasks());
+    dispatch(fetchTasks(navigate));
   }, []);
   //
   useEffect(() => {
