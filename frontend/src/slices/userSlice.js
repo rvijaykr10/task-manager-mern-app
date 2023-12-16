@@ -4,39 +4,70 @@ import axios from "axios";
 // register
 export const registerUser = createAsyncThunk(
   "users/registerUser",
-  async (body) => {
+  async (body, { dispatch }) => {
     try {
       const response = await axios.post("/api/users", body);
       const data = await response?.data;
       localStorage.setItem("userInfo", JSON.stringify(data));
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: "Successfully Registered!",
+          type: "info",
+        })
+      );
       return data;
     } catch (error) {
-      console.error(error);
-      alert(error?.response?.data?.error || error);
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: error?.response?.data?.error || error,
+          type: "error",
+        })
+      );
     }
   }
 );
 
 // login
-export const loginUser = createAsyncThunk("users/loginUser", async (body) => {
-  try {
-    const response = await axios.post("/api/users/auth", body);
-    const { data } = response;
-    localStorage.setItem("userInfo", JSON.stringify(data));
-    return data;
-  } catch (error) {
-    console.error(error);
-    alert(error?.response?.data?.error || error);
+export const loginUser = createAsyncThunk(
+  "users/loginUser",
+  async (body, { dispatch }) => {
+    try {
+      const response = await axios.post("/api/users/auth", body);
+      const { data } = response;
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(setToaster({ isOpen: true, text: "Logged In!", type: "info" }));
+      return data;
+    } catch (error) {
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: error?.response?.data?.error || error,
+          type: "error",
+        })
+      );
+    }
   }
-});
+);
 
 // logout
 export const logoutUser = createAsyncThunk("users/logoutUser", async (body) => {
   try {
     await axios.post("/api/users/logout", body);
   } catch (error) {
-    console.error(error);
-    alert(error?.response?.data?.error || error);
+    dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+    dispatch(
+      setToaster({
+        isOpen: true,
+        text: error?.response?.data?.error || error,
+        type: "error",
+      })
+    );
   }
 });
 
@@ -49,11 +80,16 @@ export const usersSlice = createSlice({
       : {},
     status: "idle",
     error: null,
+    toaster: { isOpen: false, text: "", type: "" },
   },
   reducers: {
     logout: (state, action) => {
       state.userInfo = {};
       localStorage.clear();
+      state.toaster = { isOpen: true, text: "Logged Out!", type: "info" };
+    },
+    setToaster: (state, action) => {
+      state.toaster = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -94,6 +130,6 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { logout } = usersSlice.actions;
+export const { logout, setToaster } = usersSlice.actions;
 
 export default usersSlice.reducer;

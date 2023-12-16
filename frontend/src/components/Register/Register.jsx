@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../slices/userSlice.js";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser, setToaster } from "../../slices/userSlice.js";
 import styles from "./Register.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -12,11 +12,38 @@ const Register = () => {
   //
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  //
+  const userInfo = useSelector((state) => state.users.userInfo);
+  const isLoggedIn = userInfo && Object.keys(userInfo)?.length > 0;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     try {
       if (password !== confirmPassword) {
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        dispatch(
+          setToaster({
+            isOpen: false,
+            text: "",
+            type: "",
+          })
+        );
+        dispatch(
+          setToaster({
+            isOpen: true,
+            text: "Passwords not matching!",
+            type: "error",
+          })
+        );
         return;
       }
       const apiBody = {
@@ -29,7 +56,6 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      navigate("/");
     } catch (error) {
       console.error(error);
     }

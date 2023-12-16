@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setToaster } from "./userSlice";
 import axios from "axios";
 //
 //
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
-  async (navigate) => {
+  async (navigate, { dispatch }) => {
     try {
       const response = await axios("/api/tasks");
       const data = await response.data;
@@ -12,21 +13,35 @@ export const fetchTasks = createAsyncThunk(
       return result;
     } catch (error) {
       if (error.response.status === 401) {
+        dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+        dispatch(
+          setToaster({
+            isOpen: true,
+            text: "Unauthorized User!",
+            type: "error",
+          })
+        );
         navigate("/");
         return;
       }
-      console.error(error);
-      alert(error?.response?.data?.error || error);
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: error?.response?.data?.error || error,
+          type: "error",
+        })
+      );
     }
   }
 );
 //
 export const addTask = createAsyncThunk(
   "tasks/addTasks",
-  async (body, thunkAPI) => {
+  async (body, { dispatch }) => {
     try {
       await axios.post("/api/tasks", body);
-      thunkAPI.dispatch(fetchTasks());
+      dispatch(fetchTasks());
     } catch (error) {
       console.error(error);
       alert(error?.response?.data?.error || error);
@@ -36,26 +51,38 @@ export const addTask = createAsyncThunk(
 //
 export const updateTask = createAsyncThunk(
   "tasks/updateTasks",
-  async (body, thunkAPI) => {
+  async (body, { dispatch }) => {
     try {
       await axios.put("/api/tasks", body);
-      thunkAPI.dispatch(fetchTasks());
+      dispatch(fetchTasks());
     } catch (error) {
-      console.error(error);
-      alert(error?.response?.data?.error || error);
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: error?.response?.data?.error || error,
+          type: "error",
+        })
+      );
     }
   }
 );
 //
 export const deleteTask = createAsyncThunk(
   "tasks/deleteTasks",
-  async (taskId, thunkAPI) => {
+  async (taskId, { dispatch }) => {
     try {
       await axios.delete(`/api/tasks/${taskId}`);
-      thunkAPI.dispatch(fetchTasks());
+      dispatch(fetchTasks());
     } catch (error) {
-      console.error(error);
-      alert(error?.response?.data?.error || error);
+      dispatch(setToaster({ isOpen: false, text: "", type: "" }));
+      dispatch(
+        setToaster({
+          isOpen: true,
+          text: error?.response?.data?.error || error,
+          type: "error",
+        })
+      );
     }
   }
 );
