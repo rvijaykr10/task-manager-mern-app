@@ -33,7 +33,10 @@ module.exports = {
       filename: "[name].[contenthash].css",
     }),
     new CompressionWebpackPlugin(),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static", // Generates a static HTML file for analysis
+      openAnalyzer: false, // Prevents the report from opening automatically
+    }),
     // new ImageMinimizerPlugin({
     //   minimizerOptions: {
     //     plugins: [
