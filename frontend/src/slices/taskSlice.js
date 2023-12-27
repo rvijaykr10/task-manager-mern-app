@@ -105,7 +105,7 @@ export const tasksSlice = createSlice({
     builder
       .addCase(fetchTasks.pending, (state) => {
         state.status = "loading";
-        state.tasks = [];
+        // state.tasks = [];
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -114,7 +114,7 @@ export const tasksSlice = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error;
-        state.tasks = [];
+        // state.tasks = [];
       })
       .addCase(addTask.pending, (state) => {
         state.status = "loading";

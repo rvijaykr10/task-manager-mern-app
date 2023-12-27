@@ -9,7 +9,7 @@ const Home = () => {
       {userInfo?.name ? (
         <p>Hey {userInfo?.name}!!! Welcome Home</p>
       ) : (
-        <p>Please login/register</p>
+        <p>Welcome to Task Manager!</p>
       )}
     </div>
   );

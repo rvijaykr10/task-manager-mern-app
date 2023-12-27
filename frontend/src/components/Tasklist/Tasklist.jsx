@@ -18,6 +18,7 @@ const Tasklist = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const taskToUpdate = useSelector((state) => state.tasks.editTaskData);
   const navigate = useNavigate();
+  // console.log(tasks, "tasks");
 
   //
   const dispatch = useDispatch();
