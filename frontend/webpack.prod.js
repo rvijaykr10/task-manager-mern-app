@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -34,14 +34,14 @@ module.exports = {
     }),
     new CompressionWebpackPlugin(),
     new BundleAnalyzerPlugin(),
-    new ImageMinimizerPlugin({
-      minimizerOptions: {
-        plugins: [
-          ["jpegtran", { progressive: true }],
-          ["optipng", { optimizationLevel: 5 }],
-        ],
-      },
-    }),
+    // new ImageMinimizerPlugin({
+    //   minimizerOptions: {
+    //     plugins: [
+    //       ["jpegtran", { progressive: true }],
+    //       ["optipng", { optimizationLevel: 5 }],
+    //     ],
+    //   },
+    // }),
   ],
   module: {
     rules: [
