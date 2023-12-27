@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   mode: "development",
@@ -17,7 +18,10 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./public/index.html",
     }),
-    new MiniCssExtractPlugin(),
+    // new MiniCssExtractPlugin(), // Typically not used in development mode
+    new BundleAnalyzerPlugin({
+      openAnalyzer: true, // Set to false if you don't want the report to open in a new browser window automatically
+    }),
   ],
   module: {
     rules: [
@@ -34,14 +38,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          "style-loader",
           { loader: "css-loader", options: { modules: true } },
         ],
       },
       {
         test: /\.s[ac]ss$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          "style-loader",
           { loader: "css-loader", options: { modules: true } },
           { loader: "sass-loader" },
         ],

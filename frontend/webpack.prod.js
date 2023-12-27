@@ -1,21 +1,47 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "build"),
     clean: true,
     assetModuleFilename: "images/[hash][ext][query]",
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: "all",
+    },
+    runtimeChunk: "single",
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./public/index.html",
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
+    new CompressionWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        plugins: [
+          ["jpegtran", { progressive: true }],
+          ["optipng", { optimizationLevel: 5 }],
+        ],
+      },
+    }),
   ],
   module: {
     rules: [
@@ -32,21 +58,34 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          //  "style-loader","css-loader"
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: "css-loader", options: { modules: true } },
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
+          "postcss-loader",
         ],
       },
       {
         test: /\.s[ac]ss$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: "css-loader", options: { modules: true } },
-          { loader: "sass-loader" },
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 2,
+            },
+          },
+          "postcss-loader",
+          "sass-loader",
         ],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         type: "asset/resource",
       },
     ],
