@@ -16,7 +16,7 @@ const Toaster = (props) => {
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       open={isToaster}
       autoHideDuration={3000}
       onClose={handleClose}
