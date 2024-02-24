@@ -20,7 +20,7 @@ module.exports = {
     }),
     // new MiniCssExtractPlugin(), // Typically not used in development mode
     new BundleAnalyzerPlugin({
-      openAnalyzer: true, // Set to false if you don't want the report to open in a new browser window automatically
+      openAnalyzer: false, // Set to false if you don't want the report to open in a new browser window automatically
     }),
   ],
   module: {
