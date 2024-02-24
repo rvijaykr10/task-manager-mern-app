@@ -10,6 +10,7 @@ module.exports = {
   mode: "production",
   entry: {
     main: "./src/index.js",
+    vendors: ["react", "react-dom"],
   },
   output: {
     filename: "[name].[contenthash].js",
@@ -19,9 +20,23 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
     splitChunks: {
-      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "all",
+          maxSize: 244 * 1024,
+        },
+      },
     },
     runtimeChunk: "single",
   },
@@ -31,13 +46,16 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
+      ignoreOrder: true,
     }),
-    new CompressionWebpackPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static", // Generates a static HTML file for analysis
-      openAnalyzer: false, // Prevents the report from opening automatically
+    new CompressionWebpackPlugin({
+      algorithm: "gzip",
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
     // new ImageMinimizerPlugin({
+    //   test: /\.(jpe?g|png|gif|svg)$/i,
     //   minimizerOptions: {
     //     plugins: [
     //       ["jpegtran", { progressive: true }],
@@ -45,6 +63,10 @@ module.exports = {
     //     ],
     //   },
     // }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      openAnalyzer: false,
+    }),
   ],
   module: {
     rules: [
