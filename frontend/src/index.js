@@ -21,7 +21,15 @@ const root = createRoot(document.getElementById("root"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<Home />} />
+      <Route
+        index={true}
+        path="/"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
+          </Suspense>
+        }
+      />
       <Route
         path="/about"
         element={
