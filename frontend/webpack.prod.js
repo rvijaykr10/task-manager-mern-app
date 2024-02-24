@@ -4,10 +4,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "production", // Make sure to set mode to "production"
   entry: {
     main: "./src/index.js",
     vendors: ["react", "react-dom"],
@@ -16,7 +15,6 @@ module.exports = {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "build"),
     clean: true,
-    // assetModuleFilename: "images/[hash][ext][query]",
   },
   optimization: {
     minimize: true,
@@ -39,6 +37,7 @@ module.exports = {
       },
     },
     runtimeChunk: "single",
+    usedExports: true, // Enable tree shaking
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -54,15 +53,6 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8,
     }),
-    // new ImageMinimizerPlugin({
-    //   test: /\.(jpe?g|png|gif|svg)$/i,
-    //   minimizerOptions: {
-    //     plugins: [
-    //       ["jpegtran", { progressive: true }],
-    //       ["optipng", { optimizationLevel: 5 }],
-    //     ],
-    //   },
-    // }),
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
       openAnalyzer: false,
