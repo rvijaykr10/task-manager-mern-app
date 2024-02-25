@@ -4,6 +4,7 @@ import styles from "./About.scss";
 const About = () => {
   return (
     <div className={styles.about}>
+      <h2>About</h2>
       <ul>
         <li>
           <h3>🚀 Register and Login</h3>

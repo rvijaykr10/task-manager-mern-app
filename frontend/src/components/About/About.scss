@@ -1,5 +1,8 @@
 @import "../../styles/base.scss";
 .about {
+  h2 {
+    text-align: center;
+  }
   ul {
     li {
       list-style: circle;
