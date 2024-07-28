@@ -3,4 +3,8 @@
 .home {
   display: flex;
   justify-content: center;
+
+  padding: 1rem;
+  font-size: $font-seven;
+  color: $color-secondary;
 }

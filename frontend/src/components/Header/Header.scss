@@ -5,22 +5,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: $primary-font;
-  border-bottom: 1px solid $tertiary-color;
+  font-size: $font-one;
+  border-bottom: 2px solid $color-primary;
+
+  padding: 0.8rem 1rem;
 
   .heading {
-    display: flex;
-    align-items: center;
-
     a {
       text-decoration: none;
-      color: #000;
+      h2 {
+        font-size: $font-six;
+        display: flex;
+        align-items: center;
+        color: $color-secondary;
+      }
     }
   }
 
   .link {
+    font-size: $font-six;
     text-decoration: none;
     margin-left: 10px;
-    color: #000;
+    color: $color-secondary;
   }
 }

@@ -20,7 +20,6 @@ const Header = () => {
         <Link to="/">
           <h2>Task Manager</h2>
         </Link>
-        <span>&nbsp;(MERN)</span>
       </div>
       {userInfo?.name && <div>User : {userInfo?.name}</div>}
       {!isLoggedIn ? (

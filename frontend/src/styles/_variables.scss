@@ -1,13 +1,55 @@
-// examople
+// // Platform Font
+$platform-font: sans-serif;
+
 // // Color Variables
-// $primary-color: #007bff;
-// $secondary-color: #6c757d;
-// $background-color: #f8f9fa;
+// https://maketintsandshades.com/#ffd43b
+$color-primary: #ffd43b;
+$color-secondary: #806a1e;
+$color-tertiary: #332a0c;
+$color-white: #fff;
+$color-black: #000;
+
+// shades - darker
+// tints - lighter
 
 // // Font Variables
-// $font-primary: 'Arial', sans-serif;
-// $font-secondary: 'Georgia', serif;
+$font-one: 0.6rem; // 10px
+$font-two: 0.8rem; // 12px
+$font-three: 0.9rem; // 14px
+$font-four: 1rem; // 16px
+$font-five: 1.1rem; // 18px
+$font-six: 1.3rem; // 20px
+$font-seven: 1.5rem; // 24px
+$font-eight: 2rem; // 30px
+$font-nine: 3rem; // 44px
+$font-ten: 4rem; // 56px
+$font-eleven: 5rem; // 86px
+$font-twelve: 6rem; // 98px
+
+// // font-weights
+$font-medium: 500;
+$font-semi-bold: 600;
+$font-bold: 700;
 
 // // Spacing Variables
-// $spacer: 1rem;
-// $spacer-lg: 2rem;
+$space-one: 0.13rem; // 2px
+$space-two: 2rem; // 4px
+$space-three: 0.5rem; // 8px
+$space-four: 0.8rem; // 12px
+$space-five: 1rem; // 16px
+$space-six: 1.5rem; // 24px
+$space-seven: 2rem; // 32px
+$space-eight: 3rem; // 48px
+$space-nine: 4rem; // 64px
+$space-ten: 5rem; // 80px
+$space-eleven: 6rem; // 96px
+$space-twelve: 8rem; // 128px
+
+// // line heights
+$line-height-small: 1.05;
+$line-height-medium: 1.2;
+$line-height-large: 1.8;
+
+// // letter spacings
+$letter-spacing-one: -0.5px;
+$letter-spacing-two: 0.75px;

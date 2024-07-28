@@ -2,24 +2,4 @@
 
 .appContainer {
   font-family: $platform-font;
-  // border: 1px solid $secondary-color;
-  height: calc(100vh - 1.25rem);
-  /* Define the keyframes for the animation */
-  // @keyframes backgroundChange {
-  //   0%,
-  //   100% {
-  //     background-color: #d3d3d3; /* Light Gray */
-  //   }
-  //   33% {
-  //     background-color: #e6e6fa; /* Lavender */
-  //   }
-  //   66% {
-  //     background-color: #aec6cf; /* Light Blue */
-  //   }
-  // }
-
-  // animation-name: backgroundChange;
-  // animation-duration: 30s; /* Duration of the animation cycle */
-  // animation-timing-function: linear; /* Keep the speed consistent */
-  // animation-iteration-count: infinite; /* Repeat the animation indefinitely */
 }
