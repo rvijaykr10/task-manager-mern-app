@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./slices/store.js";
 const App = lazy(() => import("./App.jsx"));
 import { createRoot } from "react-dom/client";
-const About = lazy(() => import("./components/About/About.jsx"));
+// const About = lazy(() => import("./components/About/About.jsx"));
 const Home = lazy(() => import("./components/Home/Home.jsx"));
 const Tasklist = lazy(() => import("./components/Tasklist/Tasklist.jsx"));
 const Login = lazy(() => import("./components/Login/Login.jsx"));
@@ -30,14 +30,14 @@ const router = createBrowserRouter(
           // </Suspense>
         }
       />
-      <Route
+      {/* <Route
         path="/about"
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <About />
           </Suspense>
         }
-      />
+      /> */}
       <Route
         path="/tasks"
         element={

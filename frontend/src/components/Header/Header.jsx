@@ -31,18 +31,18 @@ const Header = () => {
           <Link className={styles.link} to="/register">
             Register
           </Link>
-          <Link className={styles.link} to="/about">
+          {/* <Link className={styles.link} to="/about">
             About
-          </Link>
+          </Link> */}
         </div>
       ) : (
         <div>
           <Link className={styles.link} to="/tasks">
             Tasks
           </Link>
-          <Link className={styles.link} to="/about">
+          {/* <Link className={styles.link} to="/about">
             About
-          </Link>
+          </Link> */}
           <Link className={styles.link} to="/" onClick={logoutHandler}>
             Logout
           </Link>
