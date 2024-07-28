@@ -21,7 +21,9 @@ const Header = () => {
           <h2>Task Manager</h2>
         </Link>
       </div>
-      {userInfo?.name && <div>User : {userInfo?.name}</div>}
+      {userInfo?.name && (
+        <div className={styles.userName}>User : {userInfo?.name}</div>
+      )}
       {!isLoggedIn ? (
         <div>
           <Link className={styles.link} to="/login">

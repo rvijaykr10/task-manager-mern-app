@@ -16,6 +16,7 @@ const Home = lazy(() => import("./components/Home/Home.jsx"));
 const Tasklist = lazy(() => import("./components/Tasklist/Tasklist.jsx"));
 const Login = lazy(() => import("./components/Login/Login.jsx"));
 const Register = lazy(() => import("./components/Register/Register.jsx"));
+import { Loader } from "./components/Loader/Loader.jsx";
 const root = createRoot(document.getElementById("root"));
 //
 const router = createBrowserRouter(
@@ -25,9 +26,9 @@ const router = createBrowserRouter(
         index={true}
         path="/"
         element={
-          // <Suspense fallback={<div>Loading...</div>}>
-          <Home />
-          // </Suspense>
+          <Suspense fallback={<Loader />}>
+            <Home />
+          </Suspense>
         }
       />
       {/* <Route
@@ -41,7 +42,7 @@ const router = createBrowserRouter(
       <Route
         path="/tasks"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Tasklist />
           </Suspense>
         }
@@ -49,7 +50,7 @@ const router = createBrowserRouter(
       <Route
         path="/login"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Login />
           </Suspense>
         }
@@ -57,7 +58,7 @@ const router = createBrowserRouter(
       <Route
         path="/register"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Register />
           </Suspense>
         }
@@ -65,7 +66,7 @@ const router = createBrowserRouter(
       <Route
         path="*"
         element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Navigate to="/" replace />
           </Suspense>
         }
@@ -77,9 +78,7 @@ const router = createBrowserRouter(
 root.render(
   <Provider store={store}>
     <HelmetProvider>
-      <Suspense fallback={<div>Loading...</div>}>
-        <RouterProvider router={router} />
-      </Suspense>
+      <RouterProvider router={router} />
     </HelmetProvider>
   </Provider>
 );

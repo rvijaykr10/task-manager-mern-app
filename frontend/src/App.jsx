@@ -22,7 +22,9 @@ const App = () => {
     <div className={styles.appContainer}>
       <GlobalNotification />
       <Header />
-      <Outlet />
+      <div className={styles.outlet}>
+        <Outlet />
+      </div>
       <Toaster {...toasterDetails} />
     </div>
   );

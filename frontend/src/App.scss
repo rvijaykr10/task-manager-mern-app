@@ -2,4 +2,8 @@
 
 .appContainer {
   font-family: $platform-font;
+
+  .outlet {
+    height: calc(100vh - 6.5rem);
+  }
 }
