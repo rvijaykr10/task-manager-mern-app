@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@elements";
+import { Loader } from "../Loader/Loader.jsx";
 import styles from "./Login.scss";
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //
-  const userInfo = useSelector((state) => state.users.userInfo);
+  const { userInfo, status } = useSelector((state) => state.users);
   const isLoggedIn = userInfo && Object.keys(userInfo)?.length > 0;
 
   useEffect(() => {
@@ -31,6 +32,13 @@ const Login = () => {
     setEmail("");
     setPassword("");
   };
+
+  if (status === "loading")
+    return (
+      <div className={styles.loginLoader}>
+        <Loader />
+      </div>
+    );
 
   return (
     <div className={styles.login}>

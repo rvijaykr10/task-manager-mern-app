@@ -7,7 +7,7 @@ export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
   async (navigate, { dispatch }) => {
     try {
-      dispatch(resetTasks());
+      dispatch(resetTasksHandler());
       const response = await axios("/api/tasks");
       const data = await response.data;
       const result = await data.data;
@@ -98,13 +98,13 @@ export const tasksSlice = createSlice({
     editTaskData: {},
   },
   reducers: {
-    resetTasks: (state) => {
+    resetTasksHandler: (state) => {
       state.tasks = [];
       state.status = "idle";
       state.error = null;
       state.editTaskData = {};
     },
-    editTaskData: (state, action) => {
+    editTaskDataHandler: (state, action) => {
       state.editTaskData = action.payload;
     },
   },
@@ -156,6 +156,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { resetTasks, editTaskData } = tasksSlice.actions;
+export const { resetTasksHandler, editTaskDataHandler } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

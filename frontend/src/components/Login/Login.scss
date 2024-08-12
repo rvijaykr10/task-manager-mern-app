@@ -1,5 +1,9 @@
 @import "@styles/main.scss";
 
+.loginLoader {
+  height: calc(100vh - 4rem);
+}
+
 .login {
   padding: 1rem;
 

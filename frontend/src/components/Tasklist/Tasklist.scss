@@ -1,4 +1,7 @@
 @import "@styles/main.scss";
+.taskListLoader {
+  height: calc(100vh - 4rem);
+}
 
 .tasklistContainer {
   font-family: $platform-font;

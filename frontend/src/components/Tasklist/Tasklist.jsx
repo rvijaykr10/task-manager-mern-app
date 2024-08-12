@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@elements";
+import { Loader } from "../Loader/Loader.jsx";
 import {
   fetchTasks,
   addTask,
   deleteTask,
   updateTask,
-  editTaskData,
+  editTaskDataHandler,
 } from "../../slices/taskSlice.js";
 import styles from "./Tasklist.scss";
 
@@ -15,8 +16,7 @@ const Tasklist = () => {
   const [newTodo, setNewTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
   //
-  const tasks = useSelector((state) => state.tasks.tasks);
-  const taskToUpdate = useSelector((state) => state.tasks.editTaskData);
+  const { tasks, editTaskData, status } = useSelector((state) => state.tasks);
   const navigate = useNavigate();
 
   //
@@ -27,10 +27,10 @@ const Tasklist = () => {
   }, []);
   //
   useEffect(() => {
-    if (taskToUpdate._id) {
-      setEditTodo(taskToUpdate.task);
+    if (editTaskData?._id) {
+      setEditTodo(editTaskData?.task);
     }
-  }, [taskToUpdate._id]);
+  }, [editTaskData?._id]);
   //
 
   //delete task
@@ -47,16 +47,16 @@ const Tasklist = () => {
 
   // update task
   const updateTaskHandler = () => {
-    const { _id: id } = taskToUpdate;
+    const { _id: id } = editTaskData;
     dispatch(updateTask({ id, task: editTodo }));
     setEditTodo("");
-    dispatch(editTaskData({}));
+    dispatch(editTaskDataHandler({}));
   };
 
   // cancel update
   const cancelTaskHandler = () => {
     setEditTodo("");
-    dispatch(editTaskData({}));
+    dispatch(editTaskDataHandler({}));
   };
 
   const addTodoOnChangeHandler = (e) => {
@@ -68,7 +68,7 @@ const Tasklist = () => {
   };
 
   const renderInputField = () => {
-    if (Object.keys(taskToUpdate)?.length === 0) {
+    if (Object.keys(editTaskData)?.length === 0) {
       return (
         <>
           <TextField
@@ -100,6 +100,13 @@ const Tasklist = () => {
     );
   };
 
+  if (status === "loading")
+    return (
+      <div className={styles.taskListLoader}>
+        <Loader />
+      </div>
+    );
+
   return (
     <div className={styles.tasklistContainer}>
       <div className={styles.textButtonContainer}>{renderInputField()}</div>
@@ -127,7 +134,7 @@ const Tasklist = () => {
                   <span>
                     <Button
                       name="Edit"
-                      onClick={() => dispatch(editTaskData(obj))}
+                      onClick={() => dispatch(editTaskDataHandler(obj))}
                     />
                   </span>
                   <span>

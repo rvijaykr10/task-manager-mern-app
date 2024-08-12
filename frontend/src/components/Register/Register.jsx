@@ -4,6 +4,7 @@ import { registerUser, setToaster } from "../../slices/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@elements";
 import styles from "./Register.scss";
+import { Loader } from "../Loader/Loader.jsx";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //
-  const userInfo = useSelector((state) => state.users.userInfo);
+  const { userInfo, status } = useSelector((state) => state.users);
   const isLoggedIn = userInfo && Object.keys(userInfo)?.length > 0;
 
   useEffect(() => {
@@ -61,6 +62,14 @@ const Register = () => {
       console.error(error);
     }
   };
+
+  if (status === "loading")
+    return (
+      <div className={styles.registerLoader}>
+        <Loader />
+      </div>
+    );
+
   return (
     <div className={styles.register}>
       <div>
