@@ -5,7 +5,7 @@ import { setToaster } from "../src/slices/userSlice.js";
 import styles from "./App.scss";
 import Header from "./components/Header/Header.jsx";
 import Toaster from "./components/Toaster/Toaster.jsx";
-import { GlobalNotification } from "./components/GlobalNotification/GlobalNotification.jsx";
+// import { GlobalNotification } from "./components/GlobalNotification/GlobalNotification.jsx";
 
 const App = () => {
   const toasterDetails = useSelector((state) => state.users.toaster);
@@ -20,7 +20,7 @@ const App = () => {
   //
   return (
     <div className={styles.appContainer}>
-      <GlobalNotification />
+      {/* <GlobalNotification /> */}
       <Header />
       <div className={styles.outlet}>
         <Outlet />
