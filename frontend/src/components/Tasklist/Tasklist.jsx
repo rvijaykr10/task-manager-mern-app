@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@elements";
@@ -12,26 +12,23 @@ import {
 import styles from "./Tasklist.scss";
 
 const Tasklist = () => {
-  const inputRef = useRef();
-  const editinputRef = useRef(null);
+  const [newTodo, setNewTodo] = useState("");
+  const [editTodo, setEditTodo] = useState("");
   //
   const tasks = useSelector((state) => state.tasks.tasks);
   const taskToUpdate = useSelector((state) => state.tasks.editTaskData);
   const navigate = useNavigate();
-  // console.log(tasks, "tasks");
 
   //
   const dispatch = useDispatch();
   //
-
   useEffect(() => {
-    //load tasks
     dispatch(fetchTasks(navigate));
   }, []);
   //
   useEffect(() => {
     if (taskToUpdate._id) {
-      editinputRef.current.value = taskToUpdate.task;
+      setEditTodo(taskToUpdate.task);
     }
   }, [taskToUpdate._id]);
   //
@@ -43,23 +40,31 @@ const Tasklist = () => {
 
   //add task
   const addTaskHandler = async () => {
-    if (inputRef?.current.value === "") return;
-    dispatch(addTask({ task: inputRef.current.value }));
-    inputRef.current.value = "";
+    if (newTodo === "") return;
+    dispatch(addTask({ task: newTodo }));
+    setNewTodo("");
   };
 
   // update task
   const updateTaskHandler = () => {
     const { _id: id } = taskToUpdate;
-    dispatch(updateTask({ id, task: editinputRef.current.value }));
-    editinputRef.current.value = "";
+    dispatch(updateTask({ id, task: editTodo }));
+    setEditTodo("");
     dispatch(editTaskData({}));
   };
 
   // cancel update
   const cancelTaskHandler = () => {
-    editinputRef.current.value = "";
+    setEditTodo("");
     dispatch(editTaskData({}));
+  };
+
+  const addTodoOnChangeHandler = (e) => {
+    setNewTodo(e.target.value);
+  };
+
+  const editTodoOnChangeHandler = (e) => {
+    setEditTodo(e.target.value);
   };
 
   const renderInputField = () => {
@@ -70,7 +75,8 @@ const Tasklist = () => {
             type="text"
             name="task"
             id="task"
-            ref={inputRef}
+            value={newTodo}
+            onChange={addTodoOnChangeHandler}
             placeholder="Please add task..."
           />
           <Button name={"Add Task"} onClick={addTaskHandler} />
@@ -84,8 +90,8 @@ const Tasklist = () => {
           type="text"
           name="task"
           id="task"
-          ref={editinputRef}
-          value={editinputRef?.current?.value}
+          value={editTodo}
+          onChange={editTodoOnChangeHandler}
           placeholder="Please update task..."
         />
         <Button name="Update" onClick={updateTaskHandler} />

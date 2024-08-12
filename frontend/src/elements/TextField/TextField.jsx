@@ -5,7 +5,6 @@ export const TextField = ({
   type = "text",
   id = "",
   name = "",
-  ref = {},
   value = "",
   placeholder = "",
   onChange = () => {},
@@ -17,7 +16,6 @@ export const TextField = ({
         type={type}
         id={id}
         name={name}
-        ref={ref}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
