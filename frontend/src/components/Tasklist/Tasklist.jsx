@@ -9,6 +9,7 @@ import {
   deleteTask,
   updateTask,
   editTaskDataHandler,
+  resetTasksHandler,
 } from "../../slices/taskSlice.js";
 import styles from "./Tasklist.scss";
 
@@ -17,12 +18,14 @@ const Tasklist = () => {
   const [editTodo, setEditTodo] = useState("");
   //
   const { tasks, editTaskData, status } = useSelector((state) => state.tasks);
+
   const navigate = useNavigate();
 
   //
   const dispatch = useDispatch();
   //
   useEffect(() => {
+    dispatch(resetTasksHandler());
     dispatch(fetchTasks(navigate));
   }, []);
   //
@@ -66,7 +69,7 @@ const Tasklist = () => {
   const editTodoOnChangeHandler = (e) => {
     setEditTodo(e.target.value);
   };
-
+  //
   const renderInputField = () => {
     if (Object.keys(editTaskData)?.length === 0) {
       return (

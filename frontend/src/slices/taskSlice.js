@@ -2,12 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setToaster } from "./userSlice";
 import axios from "axios";
 //
-//
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchTasks",
   async (navigate, { dispatch }) => {
     try {
-      dispatch(resetTasksHandler());
       const response = await axios("/api/tasks");
       const data = await response.data;
       const result = await data.data;
