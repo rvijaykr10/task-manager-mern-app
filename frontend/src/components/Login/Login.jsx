@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/userSlice.js";
-import styles from "./Login.scss";
 import { useNavigate } from "react-router-dom";
+import { Button, TextField } from "@elements";
+import styles from "./Login.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ const Login = () => {
     setEmail("");
     setPassword("");
   };
+
   return (
     <div className={styles.login}>
       <div>
@@ -37,21 +39,21 @@ const Login = () => {
       </div>
       <div>
         <form onSubmit={submitHandler}>
-          <input
+          <TextField
             type="email"
             value={email}
             placeholder="Enter email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
+          <TextField
             type="password"
             value={password}
             placeholder="Enter password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Submit</button>
+          <Button name={"Submit"} type={"submit"} />
         </form>
       </div>
     </div>

@@ -109,6 +109,7 @@ module.exports = {
     // extensions: [".js", ".jsx"],
     alias: {
       "@styles": path.resolve(__dirname, "src/styles"),
+      "@elements": path.resolve(__dirname, "src/elements"),
     },
   },
 };

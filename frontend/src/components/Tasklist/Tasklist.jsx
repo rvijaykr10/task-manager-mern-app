@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { Button, TextField } from "@elements";
 import {
   fetchTasks,
   addTask,
@@ -66,21 +66,21 @@ const Tasklist = () => {
     if (Object.keys(taskToUpdate)?.length === 0) {
       return (
         <>
-          <input
+          <TextField
             type="text"
             name="task"
             id="task"
             ref={inputRef}
             placeholder="Please add task..."
           />
-          <button onClick={addTaskHandler}>Add Task</button>
+          <Button name={"Add Task"} onClick={addTaskHandler} />
         </>
       );
     }
 
     return (
       <>
-        <input
+        <TextField
           type="text"
           name="task"
           id="task"
@@ -88,8 +88,8 @@ const Tasklist = () => {
           value={editinputRef?.current?.value}
           placeholder="Please update task..."
         />
-        <button onClick={updateTaskHandler}>Update</button>
-        <button onClick={cancelTaskHandler}>Cancel</button>
+        <Button name="Update" onClick={updateTaskHandler} />
+        <Button name="Cancel" onClick={cancelTaskHandler} />
       </>
     );
   };
@@ -117,16 +117,18 @@ const Tasklist = () => {
               <li key={obj?._id}>
                 <div>{index + 1}</div>
                 <div>{obj?.task}</div>
-                <div>
+                <div className={styles.btnContainer}>
                   <span>
-                    <button onClick={() => dispatch(editTaskData(obj))}>
-                      edit
-                    </button>
+                    <Button
+                      name="Edit"
+                      onClick={() => dispatch(editTaskData(obj))}
+                    />
                   </span>
                   <span>
-                    <button onClick={() => deleteTaskHandler(obj?._id)}>
-                      delete
-                    </button>
+                    <Button
+                      name="Delete"
+                      onClick={() => deleteTaskHandler(obj?._id)}
+                    />
                   </span>
                 </div>
               </li>
