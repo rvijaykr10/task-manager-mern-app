@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/userSlice.js";
 import { useNavigate } from "react-router-dom";
-import { CustomButton, TextField } from "@elements";
+import { CustomButton, CustomTextField } from "@elements";
 import { Loader } from "../Loader/Loader.jsx";
 import styles from "./Login.scss";
 
@@ -47,17 +47,17 @@ const Login = () => {
       </div>
       <div>
         <form onSubmit={submitHandler}>
-          <TextField
+          <CustomTextField
             type="email"
             value={email}
-            placeholder="Enter email"
+            label="Enter Email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <TextField
+          <CustomTextField
             type="password"
             value={password}
-            placeholder="Enter password"
+            label="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />

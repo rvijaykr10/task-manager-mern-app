@@ -1,2 +1,2 @@
 export { CustomButton } from "./CustomButton/CustomButton.jsx";
-export { TextField } from "./TextField/TextField.jsx";
+export { CustomTextField } from "./CustomTextField/CustomTextField.jsx";

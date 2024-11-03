@@ -1,25 +1,27 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import { teal } from '@mui/material/colors';
-
+import React from "react";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import { teal } from "@mui/material/colors";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(teal[500]),
   backgroundColor: teal[500],
-  '&:hover': {
+  "&:hover": {
     backgroundColor: teal[700],
   },
 }));
 
-export const CustomButton = ({ name = "", type = "button", onClick = () => { } }) => {
+export const CustomButton = ({
+  name = "",
+  type = "button",
+  onClick = () => {},
+}) => {
   return (
-    <ColorButton variant="contained" type={type} onClick={onClick}>{name}</ColorButton>
+    <ColorButton variant="contained" type={type} onClick={onClick}>
+      {name}
+    </ColorButton>
   );
-}
-
-
-
+};
 
 // import React from "react";
 // import styles from "./Button.scss";

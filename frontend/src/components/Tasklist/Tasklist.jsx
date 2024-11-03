@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CustomButton, TextField } from "@elements";
+import { CustomButton, CustomTextField } from "@elements";
 import { Loader } from "../Loader/Loader.jsx";
 import {
   fetchTasks,
@@ -74,13 +74,11 @@ const Tasklist = () => {
     if (Object.keys(editTaskData)?.length === 0) {
       return (
         <>
-          <TextField
+          <CustomTextField
             type="text"
-            name="task"
-            id="task"
             value={newTodo}
+            label="Please add task..."
             onChange={addTodoOnChangeHandler}
-            placeholder="Please add task..."
           />
           <CustomButton name={"Add Task"} onClick={addTaskHandler} />
         </>
@@ -89,13 +87,11 @@ const Tasklist = () => {
 
     return (
       <>
-        <TextField
+        <CustomTextField
           type="text"
-          name="task"
-          id="task"
           value={editTodo}
+          label="Please update task..."
           onChange={editTodoOnChangeHandler}
-          placeholder="Please update task..."
         />
         <CustomButton name="Update" onClick={updateTaskHandler} />
         <CustomButton name="Cancel" onClick={cancelTaskHandler} />
