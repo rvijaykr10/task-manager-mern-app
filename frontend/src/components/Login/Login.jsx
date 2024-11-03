@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/userSlice.js";
 import { useNavigate } from "react-router-dom";
-import { CustomButton, TextField } from "@elements";
+import { Button, TextField } from "@elements";
 import { Loader } from "../Loader/Loader.jsx";
 import styles from "./Login.scss";
 
@@ -61,7 +61,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <CustomButton name={"Submit"} type={"submit"} />
+          <Button name={"Submit"} type={"submit"} />
         </form>
       </div>
     </div>
