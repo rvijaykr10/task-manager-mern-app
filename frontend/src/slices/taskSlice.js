@@ -109,7 +109,7 @@ export const tasksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
         // state.tasks = [];
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
@@ -122,7 +122,7 @@ export const tasksSlice = createSlice({
         // state.tasks = [];
       })
       .addCase(addTask.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(addTask.fulfilled, (state) => {
         state.status = "succeeded";
@@ -132,7 +132,7 @@ export const tasksSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(deleteTask.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(deleteTask.fulfilled, (state) => {
         state.status = "succeeded";
@@ -142,7 +142,7 @@ export const tasksSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(updateTask.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(updateTask.fulfilled, (state) => {
         state.status = "succeeded";

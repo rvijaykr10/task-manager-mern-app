@@ -95,7 +95,7 @@ export const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -107,7 +107,7 @@ export const usersSlice = createSlice({
         state.userInfo = {};
       })
       .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -118,7 +118,7 @@ export const usersSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(logoutUser.pending, (state) => {
-        state.status = "loading";
+        state.status = "";
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.status = "succeeded";
