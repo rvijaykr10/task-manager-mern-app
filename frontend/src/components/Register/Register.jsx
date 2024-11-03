@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, setToaster } from "../../slices/userSlice.js";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField } from "@elements";
+import { CustomButton, TextField } from "@elements";
 import styles from "./Register.scss";
 import { Loader } from "../Loader/Loader.jsx";
 
@@ -105,7 +105,7 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <Button name={"Submit"} type={"submit"} />
+          <CustomButton name={"Submit"} type={"submit"} />
         </form>
       </div>
     </div>

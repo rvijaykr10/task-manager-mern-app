@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField } from "@elements";
+import { CustomButton, TextField } from "@elements";
 import { Loader } from "../Loader/Loader.jsx";
 import {
   fetchTasks,
@@ -82,7 +82,7 @@ const Tasklist = () => {
             onChange={addTodoOnChangeHandler}
             placeholder="Please add task..."
           />
-          <Button name={"Add Task"} onClick={addTaskHandler} />
+          <CustomButton name={"Add Task"} onClick={addTaskHandler} />
         </>
       );
     }
@@ -97,8 +97,8 @@ const Tasklist = () => {
           onChange={editTodoOnChangeHandler}
           placeholder="Please update task..."
         />
-        <Button name="Update" onClick={updateTaskHandler} />
-        <Button name="Cancel" onClick={cancelTaskHandler} />
+        <CustomButton name="Update" onClick={updateTaskHandler} />
+        <CustomButton name="Cancel" onClick={cancelTaskHandler} />
       </>
     );
   };
@@ -135,13 +135,13 @@ const Tasklist = () => {
                 <div>{obj?.task}</div>
                 <div className={styles.btnContainer}>
                   <span>
-                    <Button
+                    <CustomButton
                       name="Edit"
                       onClick={() => dispatch(editTaskDataHandler(obj))}
                     />
                   </span>
                   <span>
-                    <Button
+                    <CustomButton
                       name="Delete"
                       onClick={() => deleteTaskHandler(obj?._id)}
                     />
