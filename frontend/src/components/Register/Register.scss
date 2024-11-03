@@ -1,4 +1,4 @@
-@import "@styles/main.scss";
+@use "@styles/main.scss";
 
 .registerLoader {
   height: calc(100vh - 4rem);
@@ -14,7 +14,7 @@
 
   h2 {
     font-size: 1.5rem;
-    color: $color-secondary;
+    color: main.$color-secondary;
   }
 
   form {

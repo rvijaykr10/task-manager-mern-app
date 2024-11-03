@@ -1,12 +1,12 @@
-@import "@styles/main.scss";
+@use "@styles/main.scss";
 
 .headerContainer {
   height: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: $font-one;
-  border-bottom: 2px solid $color-primary;
+  font-size: main.$font-one;
+  border-bottom: 2px solid main.$color-primary;
 
   padding: 0.8rem 1rem;
 
@@ -14,23 +14,23 @@
     a {
       text-decoration: none;
       h2 {
-        font-size: $font-six;
+        font-size: main.$font-six;
         display: flex;
         align-items: center;
-        color: $color-secondary;
+        color: main.$color-secondary;
       }
     }
   }
 
   .link {
-    font-size: $font-six;
+    font-size: main.$font-six;
     text-decoration: none;
     margin-left: 10px;
-    color: $color-secondary;
+    color: main.$color-secondary;
   }
 
   .userName {
-    font-size: $font-six;
-    color: $color-secondary;
+    font-size: main.$font-six;
+    color: main.$color-secondary;
   }
 }

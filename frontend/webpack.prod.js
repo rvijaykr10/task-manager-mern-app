@@ -106,7 +106,7 @@ module.exports = {
     ],
   },
   resolve: {
-    // extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".scss"],
     alias: {
       "@styles": path.resolve(__dirname, "src/styles"),
       "@elements": path.resolve(__dirname, "src/elements"),

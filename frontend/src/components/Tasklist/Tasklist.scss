@@ -1,10 +1,10 @@
-@import "@styles/main.scss";
+@use "@styles/main.scss";
 .taskListLoader {
   height: calc(100vh - 4rem);
 }
 
 .tasklistContainer {
-  font-family: $platform-font;
+  font-family: main.$platform-font;
   height: calc(100vh - 3.28rem);
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
   .list {
     width: 70%;
     height: 80%;
-    border: 1px solid $color-primary;
+    border: 1px solid main.$color-primary;
     overflow: auto;
 
     // .btnContainer {
@@ -44,7 +44,7 @@
         padding: 0.3rem 0.8rem;
 
         &:first-child {
-          border-bottom: 1px solid $color-tertiary;
+          border-bottom: 1px solid main.$color-tertiary;
           position: sticky;
           top: 0;
           background-color: #fff;
