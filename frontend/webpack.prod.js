@@ -77,7 +77,10 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true,
+              modules: {
+                auto: true, // Automatically enable CSS Modules for all CSS files
+                localIdentName: "[name]__[local]__[hash:base64:5]", // Include component name and hash for alphanumeric class names
+              },
               importLoaders: 1,
             },
           },
@@ -91,7 +94,10 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true,
+              modules: {
+                auto: true, // Automatically enable CSS Modules for all SCSS files
+                localIdentName: "[name]__[local]__[hash:base64:5]", // Include component name and hash for alphanumeric class names
+              },
               importLoaders: 2,
             },
           },
